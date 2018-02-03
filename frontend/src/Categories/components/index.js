@@ -8,7 +8,7 @@ const Categories = ({ categories, selected }) => (
       <RaisedButton label="All" secondary={!selected} />
     </Link>
     {categories.map(({ path, name }) => (
-      <Link to={`/category/${path}`} key={path}>
+      <Link to={`/${path}`} key={path}>
         <RaisedButton label={name} secondary={selected === path} />
       </Link>
     ))}

@@ -8,29 +8,6 @@ const TYPES = createTypes({
   constants: ['REQUEST', 'SUCCESS', 'ERROR', 'UPDATE', 'ADD', 'DELETE'],
 })
 
-const formatPost = ({
-  id,
-  author,
-  body,
-  title,
-  timestamp,
-  category,
-  voteScore,
-  comments,
-}) => ({
-  id,
-  author,
-  body,
-  title,
-  timestamp,
-  category,
-  voteScore,
-  comments,
-  publishDate: timestamp,
-})
-
-const formatPosts = posts => posts.map(formatPost)
-
 //actions
 const request = createAction(TYPES.REQUEST)
 const requestSuccess = createAction(TYPES.SUCCESS, 'posts')
@@ -71,7 +48,9 @@ export const fetchPosts = () => (dispatch, getState, api) => {
     return
   }
   dispatch(request())
-  api.getPosts.then(formatPosts).then(posts => dispatch(requestSuccess(posts)))
+  api.getPosts.then(
+    posts => console.log(posts) || dispatch(requestSuccess(posts))
+  )
 }
 
 export const fetchPost = id => (dispatch, getState, api) => {
@@ -81,10 +60,7 @@ export const fetchPost = id => (dispatch, getState, api) => {
   }
   dispatch(request())
 
-  api
-    .getPost(id)
-    .then(formatPost)
-    .then(post => dispatch(requestSuccess([post])))
+  api.getPost(id).then(post => dispatch(requestSuccess([post])))
 }
 
 export const upVotePost = id => (dispatch, _, api) => {

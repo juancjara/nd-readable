@@ -32,8 +32,8 @@ class App extends Component {
             <Provider store={store}>
               <div>
                 <Route path="/" exact component={Landing} />
-                <Route path="/category/:category" exact component={Landing} />
-                <Route path="/post/:id" component={Post} />
+                <Route path="/:category/" exact component={Landing} />
+                <Route path="/:category/:id" component={Post} />
               </div>
             </Provider>
           </BrowserRouter>

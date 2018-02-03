@@ -9,7 +9,7 @@ const PostDetail = ({
   body,
   author,
   category,
-  publishDate,
+  timestamp,
   id,
   upVotePost,
   downVotePost,
@@ -19,7 +19,7 @@ const PostDetail = ({
   <div>
     <h2>{title}</h2>
     <h4>
-      By {author} , {fecha.format(publishDate, 'hh:mm:ss A YYYY/MM/DD')}
+      By {author} , {fecha.format(timestamp, 'hh:mm:ss A YYYY/MM/DD')}
     </h4>
     <Chip>{category}</Chip>
     <p>{body}</p>

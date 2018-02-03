@@ -29,7 +29,7 @@ const Post = ({
       voteScore={voteScore}
     />
     <CardActions>
-      <Link to={`/post/${id}`}>
+      <Link to={`${category}/${id}`}>
         <FlatButton label="See more" />
       </Link>
     </CardActions>
