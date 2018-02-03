@@ -1,5 +1,6 @@
 import React from 'react'
 import Chip from 'material-ui/Chip'
+import fecha from 'fecha'
 
 import Votes from 'components/Votes'
 
@@ -18,7 +19,7 @@ const PostDetail = ({
   <div>
     <h2>{title}</h2>
     <h4>
-      By {author} , {publishDate}
+      By {author} , {fecha.format(publishDate, 'hh:mm:ss A YYYY/MM/DD')}
     </h4>
     <Chip>{category}</Chip>
     <p>{body}</p>

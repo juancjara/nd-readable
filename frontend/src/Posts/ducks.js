@@ -26,7 +26,7 @@ const formatPost = ({
   category,
   voteScore,
   comments,
-  publishDate: '03/04/2017',
+  publishDate: timestamp,
 })
 
 const formatPosts = posts => posts.map(formatPost)
