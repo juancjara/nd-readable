@@ -12,8 +12,8 @@ import {
   createPost,
   downVotePost,
   upVotePost,
-} from '../../Posts/ducks'
-import Preview from '../../Posts/components/Preview'
+} from 'Posts/ducks'
+import Preview from 'Posts/components/Preview'
 
 import CreatePost from 'Posts/components/Create'
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import { fetchCategories } from '../../Categories/ducks'
+import { fetchCategories } from 'Categories/ducks'
 import Categories from './CategoriesConnected'
 import Posts from './Posts'
 

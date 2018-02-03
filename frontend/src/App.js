@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { Route, BrowserRouter } from 'react-router-dom'
 
-import Landing from 'Landing'
+import Landing from 'screens/Landing'
 import Post from 'screens/Post'
 
 import { Provider } from 'react-redux'
