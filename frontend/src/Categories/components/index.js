@@ -1,19 +1,18 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import RaisedButton from 'material-ui/RaisedButton';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import RaisedButton from 'material-ui/RaisedButton'
 
-const Categories = ({
-  categories,
-}) => (
+const Categories = ({ categories, selected }) => (
   <div>
-    {
-      categories.map(({ path, name }) => 
-        <Link to={`category/${path}`} key={path}>
-          <RaisedButton label={name} />
-        </Link>
-      )
-    }
+    <Link to="/">
+      <RaisedButton label="All" secondary={!selected} />
+    </Link>
+    {categories.map(({ path, name }) => (
+      <Link to={`/category/${path}`} key={path}>
+        <RaisedButton label={name} secondary={selected === path} />
+      </Link>
+    ))}
   </div>
-);
+)
 
-export default Categories;
+export default Categories

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import RaisedButton from 'material-ui/RaisedButton'
 import AddIcon from 'material-ui/svg-icons/content/add'
 import Modal from 'react-modal'
@@ -29,7 +30,6 @@ class Posts extends Component {
   render() {
     const {
       posts,
-      loading,
       createPost,
       categories,
       downVotePost,
@@ -78,11 +78,11 @@ class Posts extends Component {
   }
 }
 
-const mapState = state => ({
-  posts: getPosts(state),
+const mapState = (state, { category }) => ({
+  posts: getPosts(state, category),
   categories: getCategories(state).map(c => c.name),
 })
 
 const mapDispatch = { fetchPosts, createPost, downVotePost, upVotePost }
 
-export default connect(mapState, mapDispatch)(Posts)
+export default withRouter(connect(mapState, mapDispatch)(Posts))

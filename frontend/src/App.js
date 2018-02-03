@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import { Switch, Route, BrowserRouter } from 'react-router-dom'
+import { Route, BrowserRouter } from 'react-router-dom'
 
 import Landing from 'Landing'
 import Post from 'screens/Post'
@@ -28,19 +28,15 @@ class App extends Component {
     return (
       <div style={{ margin: '0 20px' }}>
         <MuiThemeProvider>
-          <Provider store={store}>
-            <BrowserRouter>
-              <Switch>
-                <Route path="/" exact render={() => <Landing />} />
-                <Route
-                  path="/post/:id"
-                  render={({ match: { params: { id } } }) => (
-                    <Post postId={id} />
-                  )}
-                />
-              </Switch>
-            </BrowserRouter>
-          </Provider>
+          <BrowserRouter>
+            <Provider store={store}>
+              <div>
+                <Route path="/" exact component={Landing} />
+                <Route path="/category/:category" exact component={Landing} />
+                <Route path="/post/:id" component={Post} />
+              </div>
+            </Provider>
+          </BrowserRouter>
         </MuiThemeProvider>
       </div>
     )

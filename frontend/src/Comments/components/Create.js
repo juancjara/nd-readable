@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Field } from 'react-final-form'
 import TextField from 'material-ui/TextField'
-import SelectField from 'material-ui/SelectField'
-import MenuItem from 'material-ui/MenuItem'
 import RaisedButton from 'material-ui/RaisedButton'
 
 const TextFieldAdapter = ({ input, meta, ...rest }) => (

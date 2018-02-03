@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import RaisedButton from 'material-ui/RaisedButton'
 import { Link } from 'react-router-dom'
 
@@ -8,7 +9,7 @@ import Comments from './Comments'
 /* should I fetch comments here? or in the Comments container */
 class Post extends Component {
   render() {
-    const { postId } = this.props;
+    const { postId } = this.props
     return (
       <div>
         <Link to="/">
@@ -21,4 +22,4 @@ class Post extends Component {
   }
 }
 
-export default Post
+export default withRouter(Post)

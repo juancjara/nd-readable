@@ -66,7 +66,10 @@ export const createPost = values => (dispatch, _, api) => {
   api.createPost(payload).then(res => dispatch(addPost({ ...payload, ...res })))
 }
 
-export const fetchPosts = () => (dispatch, _, api) => {
+export const fetchPosts = () => (dispatch, getState, api) => {
+  if (getState().posts.hasData) {
+    return
+  }
   dispatch(request())
   api.getPosts.then(formatPosts).then(posts => dispatch(requestSuccess(posts)))
 }
@@ -98,8 +101,10 @@ export const downVotePost = id => (dispatch, _, api) => {
 
 //selectors
 export const isLoading = state => state.posts.isFetching
-export const getPosts = state =>
-  state.posts.ids.map(id => state.posts.items[id])
+export const getPosts = (state, category) =>
+  state.posts.ids
+    .map(id => state.posts.items[id])
+    .filter(post => (category ? category == post.category : true))
 export const getPost = (state, id) => {
   if (id in state.posts.items) {
     return state.posts.items[id]

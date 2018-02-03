@@ -1,27 +1,40 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
+import Modal from 'react-modal'
 
 import {
   isLoading,
   getPost,
-  fetchPost,
+  fetchPosts,
   upVotePost,
   downVotePost,
   deletePost,
+  updatePost,
 } from 'Posts/ducks'
 import Detail from 'Posts/components/Detail'
+import Edit from 'Posts/components/Edit'
 
 class PostDetail extends Component {
-  componentDidMount() {
-    const { postId, fetchPost } = this.props
-    fetchPost(postId)
-  }
+  state = { isOpen: false }
+
+  openModal = () => this.setState({ isOpen: true })
+  closeModal = () => this.setState({ isOpen: false })
+
   redirect = () => {
     this.props.history.replace('/')
   }
   render() {
-    const { loading, post, upVotePost, downVotePost, deletePost } = this.props
+    const { isOpen } = this.state
+    const {
+      loading,
+      post,
+      updatePost,
+      upVotePost,
+      downVotePost,
+      deletePost,
+    } = this.props
     const events = {
       upVotePost,
       downVotePost,
@@ -32,7 +45,21 @@ class PostDetail extends Component {
     ) : (
       <div>
         <Detail {...post} {...events} />
-        <RaisedButton primary label="Edit" />
+        <RaisedButton primary label="Edit" onClick={this.openModal} />
+        <Modal
+          isOpen={isOpen}
+          onRequestClose={this.closeModal}
+          ariaHideApp={false}
+        >
+          <Edit
+            {...post}
+            onCancel={this.closeModal}
+            onSubmit={values => {
+              updatePost(post.id, values, this.closeModal)
+            }}
+          />
+        </Modal>
+
         <RaisedButton
           secondary
           label="Delete"
@@ -43,16 +70,18 @@ class PostDetail extends Component {
   }
 }
 
-const mapState = (state, { postId }) => ({
+const mapState = (state, { match: { params: { id } } }) => ({
   loading: isLoading(state),
-  post: getPost(state, postId),
+  post: getPost(state, id),
+  postId: id,
 })
 
 const mapDispatch = {
-  fetchPost,
+  fetchPosts,
   upVotePost,
   downVotePost,
   deletePost,
+  updatePost,
 }
 
-export default connect(mapState, mapDispatch)(PostDetail)
+export default withRouter(connect(mapState, mapDispatch)(PostDetail))
