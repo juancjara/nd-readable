@@ -8,6 +8,7 @@ import Comments from './Comments'
 
 /* should I fetch comments here? or in the Comments container */
 class Post extends Component {
+
   render() {
     const { postId } = this.props
     return (

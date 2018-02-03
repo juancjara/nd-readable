@@ -48,9 +48,7 @@ export const fetchPosts = () => (dispatch, getState, api) => {
     return
   }
   dispatch(request())
-  api.getPosts.then(
-    posts => console.log(posts) || dispatch(requestSuccess(posts))
-  )
+  api.getPosts.then(posts => dispatch(requestSuccess(posts)))
 }
 
 export const fetchPost = id => (dispatch, getState, api) => {
@@ -80,7 +78,7 @@ export const isLoading = state => state.posts.isFetching
 export const getPosts = (state, category) =>
   state.posts.ids
     .map(id => state.posts.items[id])
-    .filter(post => (category ? category == post.category : true))
+    .filter(post => (category ? category === post.category : true))
 export const getPost = (state, id) => {
   if (id in state.posts.items) {
     return state.posts.items[id]
@@ -91,7 +89,7 @@ export const getPost = (state, id) => {
 const initialState = {
   ids: [],
   items: {},
-  isFetching: false,
+  isFetching: true,
   hasData: false,
 }
 

@@ -71,7 +71,7 @@ export const getComments = state =>
 const initialState = {
   ids: [],
   items: {},
-  isFetching: false,
+  isFetching: true,
   hasData: false,
 }
 

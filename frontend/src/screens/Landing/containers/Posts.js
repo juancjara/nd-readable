@@ -78,10 +78,13 @@ class Posts extends Component {
   }
 }
 
-const mapState = (state, { category }) => ({
-  posts: getPosts(state, category),
-  categories: getCategories(state).map(c => c.name),
-})
+const mapState = (state, { category, sortBy }) => {
+  const posts = getPosts(state, category)
+  return {
+    posts: sortBy ? posts.sort((a, b) => a[sortBy] < b[sortBy]) : posts,
+    categories: getCategories(state).map(c => c.name),
+  }
+}
 
 const mapDispatch = { fetchPosts, createPost, downVotePost, upVotePost }
 

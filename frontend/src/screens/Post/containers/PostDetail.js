@@ -19,6 +19,9 @@ import Edit from 'Posts/components/Edit'
 class PostDetail extends Component {
   state = { isOpen: false }
 
+  componentDidMount() {
+    this.props.fetchPosts()
+  }
   openModal = () => this.setState({ isOpen: true })
   closeModal = () => this.setState({ isOpen: false })
 
