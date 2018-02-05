@@ -76,6 +76,8 @@ export const downVotePost = id => (dispatch, _, api) => {
 }
 
 //selectors
+export const isValidPost = (state, id) =>
+  isLoading(state) && !!state.posts.ids[id]
 export const isLoading = state => state.posts.isFetching
 export const getPosts = (state, category) =>
   state.posts.ids
