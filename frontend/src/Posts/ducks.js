@@ -3,6 +3,8 @@ import uuidv4 from 'uuid/v4'
 
 import { createTypes, createAction, createReducer, formatList } from '../utils'
 
+const noop = () => null
+
 const TYPES = createTypes({
   prefix: 'posts',
   constants: ['REQUEST', 'SUCCESS', 'ERROR', 'UPDATE', 'ADD', 'DELETE'],
@@ -24,7 +26,7 @@ export const updatePost = (id, payload, cb) => (dispatch, _, api) => {
   })
 }
 
-export const deletePost = (id, cb) => (dispatch, _, api) => {
+export const deletePost = (id, cb = noop) => (dispatch, _, api) => {
   dispatch(request())
   api.deletePost(id).then(res => {
     dispatch(deletePostSuccess(id))

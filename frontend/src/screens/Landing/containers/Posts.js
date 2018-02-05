@@ -6,16 +6,10 @@ import AddIcon from 'material-ui/svg-icons/content/add'
 import Modal from 'react-modal'
 
 import { getCategories } from 'Categories/ducks'
-import {
-  getPosts,
-  fetchPosts,
-  createPost,
-  downVotePost,
-  upVotePost,
-} from 'Posts/ducks'
-import Preview from 'Posts/components/Preview'
+import { getPosts, fetchPosts, createPost } from 'Posts/ducks'
 
 import CreatePost from 'Posts/components/Create'
+import Post from './Post'
 
 class Posts extends Component {
   state = { isOpen: false }
@@ -28,25 +22,12 @@ class Posts extends Component {
   closeModal = () => this.setState({ isOpen: false })
 
   render() {
-    const {
-      posts,
-      createPost,
-      categories,
-      downVotePost,
-      upVotePost,
-    } = this.props
+    const { posts, createPost, categories } = this.props
     const { isOpen } = this.state
 
     return (
       <div>
-        {posts.map(post => (
-          <Preview
-            {...post}
-            key={post.id}
-            downVotePost={downVotePost}
-            upVotePost={upVotePost}
-          />
-        ))}
+        {posts.map(post => <Post post={post} key={post.id} />)}
         <RaisedButton
           onClick={this.openModal}
           label="new post"
@@ -86,6 +67,9 @@ const mapState = (state, { category, sortBy }) => {
   }
 }
 
-const mapDispatch = { fetchPosts, createPost, downVotePost, upVotePost }
+const mapDispatch = {
+  fetchPosts,
+  createPost,
+}
 
 export default withRouter(connect(mapState, mapDispatch)(Posts))
